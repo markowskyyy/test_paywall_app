@@ -1,6 +1,7 @@
 enum SubscriptionPlanType {
-  monthly(price: 199.0, displayName: 'Месячная'),
-  yearly(price: 1490.0, displayName: 'Годовая');
+  weekly(price: 149.0, displayName: 'Неделя'),
+  monthly(price: 499.0, displayName: 'Месяц'),
+  yearly(price: 3890.0, displayName: 'Год');
 
   final double price;
   final String displayName;
@@ -31,8 +32,19 @@ enum SubscriptionPlanType {
     return 0;
   }
 
+  double get pricePerYear{
+    if (this == weekly) {
+      return price * 52;
+    } else if (this == monthly) {
+      return price * 12;
+    }
+    return price;
+  }
+
   String get period {
     switch (this) {
+      case SubscriptionPlanType.weekly:
+        return 'в неделю';
       case SubscriptionPlanType.monthly:
         return 'в месяц';
       case SubscriptionPlanType.yearly:
