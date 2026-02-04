@@ -31,7 +31,7 @@ class Subscription {
     return {
       'isSubscribed': isSubscribed,
       'purchaseDate': purchaseDate?.toIso8601String(),
-      'planType': planType.toJson(), // Используем метод toJson() из enum
+      'planType': planType.toJson(),
     };
   }
 

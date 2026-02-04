@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_paywall_app/presentation/routes/app_router.dart';
 
 void main() {
+
   runApp(
       ProviderScope(
           child: const MyApp()

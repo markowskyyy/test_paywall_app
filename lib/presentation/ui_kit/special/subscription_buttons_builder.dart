@@ -3,7 +3,8 @@ import 'package:test_paywall_app/domain/entities/subscription_plan_type.dart';
 import 'package:test_paywall_app/presentation/ui_kit/ui_kit.dart';
 
 class SubscriptionButtonsBuilder extends StatefulWidget {
-  const SubscriptionButtonsBuilder({super.key});
+  final Function(SubscriptionPlanType) func;
+  const SubscriptionButtonsBuilder({super.key, required this.func});
 
   @override
   State<SubscriptionButtonsBuilder> createState() => _SubscriptionButtonsBuilderState();
@@ -11,7 +12,7 @@ class SubscriptionButtonsBuilder extends StatefulWidget {
 
 class _SubscriptionButtonsBuilderState extends State<SubscriptionButtonsBuilder> {
 
-  var chosenIndex = 0;
+  var chosenIndex = -1;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class _SubscriptionButtonsBuilderState extends State<SubscriptionButtonsBuilder>
               setState(() {
                 chosenIndex = index;
               });
+              widget.func(plan);
             },
           );
         },

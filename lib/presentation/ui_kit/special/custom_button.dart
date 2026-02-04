@@ -1,15 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:test_paywall_app/design.dart';
-import 'package:test_paywall_app/gen/assets.gen.dart';
 
 class CustomButton extends StatelessWidget {
+  final String text;
   final VoidCallback onTap;
+  final Color backgroundColor;
+  final Color textColor;
 
-  const CustomButton({
+  const CustomButton._({
     super.key,
     required this.onTap,
+    required this.text,
+    required this.backgroundColor,
+    required this.textColor,
   });
+
+  factory CustomButton({
+    Key? key,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return CustomButton._(
+      key: key,
+      text: text,
+      onTap: onTap,
+      backgroundColor: Colors.white,
+      textColor: AppColors.black,
+    );
+  }
+
+  factory CustomButton.dark({
+    Key? key,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return CustomButton._(
+      key: key,
+      text: text,
+      onTap: onTap,
+      backgroundColor: AppColors.darkWine,
+      textColor: Colors.white,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +52,13 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(28),
         ),
         child: Text(
-            'Оплатить подписку',
-            style: nMediumTextStyle.copyWith(color: AppColors.black),
-        )
+          text,
+          style: nMediumTextStyle.copyWith(color: textColor),
+        ),
       ),
     );
   }
