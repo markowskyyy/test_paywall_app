@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test_paywall_app/data/datasources/local_subscription_datasource.dart';
+import 'package:test_paywall_app/data/repositories/subscription_repository_impl.dart';
 import 'package:test_paywall_app/presentation/routes/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final repository = SubscriptionRepositoryImpl(LocalSubscriptionDataSource());
+  final initialSubscription = await repository.getSubscription();
+  final initialIsSubscribed = initialSubscription?.isSubscribed == true;
 
   runApp(
       ProviderScope(
+          overrides: [
+            initialSubscriptionStateProvider.overrideWithValue(initialIsSubscribed),
+          ],
           child: const MyApp()
       )
   );
@@ -19,7 +29,6 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
-      title: 'Subscription App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:test_paywall_app/design.dart';
 import 'package:test_paywall_app/presentation/providers/subscription_providers.dart';
 import 'package:test_paywall_app/presentation/ui_kit/ui_kit.dart';
 
@@ -31,23 +32,20 @@ class MainScreen extends ConsumerWidget {
                 color: Colors.green,
               ),
               const Gap(24),
-              const Text(
+              Text(
                 'Подписка активна!',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: bLargeTitleTextStyle.copyWith(color: AppColors.black)
               ),
               const Gap(12),
               if (subscription?.planType != null)
                 Text(
-                  'План: ${subscription!.planType!.displayName}',
-                  style: const TextStyle(fontSize: 18),
+                  'Длительность подписки: ${subscription!.planType.displayNameLover}',
+                  style: nSubtitleTextStyle.copyWith(color: AppColors.black),
                 ),
               const Gap(36),
-              const Text(
+              Text(
                 '🎉 Теперь вам доступны все функции приложения!',
-                style: TextStyle(fontSize: 18),
+                style: nSubtitleTextStyle.copyWith(color: AppColors.black),
                 textAlign: TextAlign.center,
               ),
               const Gap(36),

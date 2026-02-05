@@ -5,12 +5,16 @@ import 'package:test_paywall_app/presentation/providers/subscription_providers.d
 import 'package:test_paywall_app/presentation/screens/main_screen.dart';
 import 'package:test_paywall_app/presentation/screens/paywall_screen.dart';
 
+final initialSubscriptionStateProvider = Provider<bool>((ref) {
+  return false;
+});
 
 final appRouterProvider = Provider<GoRouter>((ref) {
-  final isSubscribed = ref.watch(isSubscribedProvider);
+  final initialIsSubscribed = ref.watch(initialSubscriptionStateProvider);
+  final isSubscribedAsync = ref.watch(isSubscribedProvider);
 
   return GoRouter(
-    initialLocation: '/paywall',
+    initialLocation: initialIsSubscribed ? '/main' : '/paywall',
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
@@ -31,6 +35,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       ),
     ],
     redirect: (context, state) {
+      final isSubscribed = isSubscribedAsync;
+
       if (isSubscribed && state.matchedLocation == '/paywall') {
         return '/main';
       }

@@ -24,6 +24,8 @@ enum SubscriptionPlanType {
     }
   }
 
+  String get displayNameLover => displayName.toLowerCase();
+
   double get discountPercentage {
     if (this == yearly) {
       final monthlyTotal = monthly.price * 12;

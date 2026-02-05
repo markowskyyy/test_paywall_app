@@ -40,6 +40,12 @@ class AppGradients {
 }
 
 
+const TextStyle bLargeTitleTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 32,
+  fontWeight: FontWeight.bold,
+);
+
 const TextStyle bTitleTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 24,
